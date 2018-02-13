@@ -4,26 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Naruto RPG</title>
+<title>FF7 RPG</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 <style>
-.fader{
-opacity : 0.4;
-}
+.fader { opacity : 0.4;}
+body { background-image: url('assets/images/ff7.jpg')}
+* { color: white }
 </style>
+<audio controls autoplay id="music">
+<source src="assets/images/battle.mp3" type="audio/ogg" type="audio/mpeg">
+</audio>
+
 </head>
 
 <body>
+  
 
 <div class="container">
 <div id ="characters" class="row">
 </div>
 <div id ="gameplay" class="row">
 <div id="myHero" class="col-md-4"></div>
-<div id="myBattle" class="col-md-4">
-<button id="attackBTN" class="btn btn-danger">ATTACK</button>
+<div class="row-md-12">
+    <div id="myBattle" class="col-md-4 text-center">
+        <button id="attackBTN" class="btn btn-danger text-center">ATTACK</button>
+    </div>
 </div>
 <div id="myEnemy" class="col-md-4"></div>
+</div>
 </div>
 </div>
 
@@ -34,13 +42,15 @@ crossorigin="anonymous"></script>
 
 <script>
 
-$( document).ready ( function() {
+$(document).ready ( function() {
 var chosenHero
 var chosenEnemy
 var isHeroChosen
 var isEnemyChosen
 var isHeroAlive
 var isEnemyAlive
+
+audio = $("<audio>").attr("prelude","auto");
 
 function initGame () {
 isHeroChosen =false
@@ -64,8 +74,8 @@ $(this).addClass("fader")
 isHeroChosen = true
 myHeroThing = $("<div id='" +
 chosenHero.name +"'><img src='" +
-chosenHero.image+"'/><p>" +
-chosenHero.name+"</p><h6>HP</h6><p id='heroHP'>"+chosenHero.hp +
+chosenHero.image+"'style='width:400px;height:630px;'/><p>" +
+chosenHero.name+"</p><h4>HP</h4><p id='heroHP'>"+chosenHero.hp +
 "</p></div>")
 $("#myHero").html(myHeroThing)
 
@@ -77,10 +87,11 @@ chosenEnemy = charArr[$(this).attr("value")]
 console.log(chosenEnemy)
 $(this).addClass("fader")
 isEnemyChosen = true
+$("#characters").hide()
 myEnemyThing = $("<div id='" +
 chosenEnemy.name + "'><img src='" +
-chosenEnemy.image + "'/><p>" +
-chosenEnemy.name + "</p><h6>HP</h6><p id='enemyHP'>"+chosenEnemy.hp +
+chosenEnemy.image + "'style='width:400px;height:630px;'/> <p>" +
+chosenEnemy.name + "</p><h4>HP</h4><p id='enemyHP'>"+chosenEnemy.hp +
 "</p></div>")
 $("#myEnemy").html(myEnemyThing)
 }
@@ -91,54 +102,95 @@ $("#attackBTN").on("click", function() {
 var num1 = Math.floor(Math.random()*20)
 var num2 = Math.floor(Math.random()*20)
 chosenEnemy.hp -= num1
-$("#enemyHp").text(chosenEnemy.hp)
+$("#enemyHP").text(chosenEnemy.hp)
 $("#myBattle").append("<p>" +
-chosenHero.name + " attacked " +
-chosenEnemy.name + " for " + num1 + " points!</p>")
+chosenHero.name + " <strong>attacked</strong> " +
+chosenEnemy.name + " <strong> for</strong> " + num1 + "<strong> points! </strong></p>")
 chosenHero.hp -= num2
-$("#heroHp").text(chosenHero.hp)
+$("#heroHP").text(chosenHero.hp)
 $("#myBattle").append("<p>" +
-chosenEnemy.name + " attacked " +
-chosenHero.name + " for " + num2 + " points!</p>")
+chosenEnemy.name + " <strong>attacked</strong> " +
+chosenHero.name + " <strong>for</strong> " + num2 + " <strong>points!</strong></p>")
+winOrLose()
 })
 
+function winOrLose() {
+if (chosenHero.hp <= 0) {
+   $("#myBattle").empty()
+   $("#myBattle").html("<h2>GAME OVER!</h2>") 
+   console.log("You Lose")   
+}
+else if (chosenEnemy.hp <=0) {
+   $("#myBattle").empty();
+   $("#myBattle").html("<h2>You Win!</h2>")
+   console.log("You Win")
+}
+
+if ( isHeroAlive && !isEnemyAlive ) {
+//    $("#music").empty(); in progress...
+     clearDiv
+}
+else if ( isEnemyAlive && !isHeroAlive) {
+
+}
+}
+// in progress...... LOL
+// for(var i = 0; i < audioArr.length; i++) {
+//     $("#music").attr("src", audioArr).appendTo(music);
+//     audio[0].load();
+// }
+
+// var audioArr = [
+//     {
+//     name: "victory",
+//     audio:"assets/images.victory.mp3"
+//     },
+//     {
+//     name: "fight",
+//     audio:"assets/images.fight.mp3"    
+//     },
+//     {
+//     name: "lose",
+//     audio:"assets/images.heart.mp3"
+//     },  
+//     ]
 // name, hp, strength, image
 var charArr = [
 {
-name: "Sasuke",
+name: "Sephiroth",
 hp:100,
-strength:24,
-image:"assets/images/Sasuke.png"
+strength:20,
+image:"assets/images/sephiroth.png"
 },
 {
-name: "Sakura",
-hp: 80,
-strength:15,
-image:"assets/images/sakura.png"
+name: "Cloud",
+hp: 100,
+strength:20,
+image:"assets/images/cloud.png"
 },
 {
-name: "Naruto",
-hp: 110,
-strength: 22,
-image:"assets/images/Naruto.png"
+name: "Aerith",
+hp: 100,
+strength: 14,
+image:"assets/images/aerith.png"
 },
 {
-name: "Kakashi",
-hp: 130,
-strength: 24,
-image:"assets/images/Kakashi.jpg"
+name: "Tifa",
+hp: 100,
+strength: 20,
+image:"assets/images/tifa.png"
 },
 {
-name: "Itachi",
-hp:150,
-strength:25,
-image:"assets/images/Itachi.png"
+name: "Vincent",
+hp:100,
+strength:20,
+image:"assets/images/vincent.png"
 },
 {
-name: "Orochimaru ",
-hp: 160,
-strength:30,
-image:"assets/images/Orchimaru.jpg"
+name: "Barret ",
+hp: 100,
+strength:20,
+image:"assets/images/Barret.png"
 },
 ]
 
@@ -147,3 +199,4 @@ initGame()
 </script>
 </body>
 </html>
+
