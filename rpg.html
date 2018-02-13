@@ -113,14 +113,20 @@ winOrLose()
 
 function winOrLose() {
 if (chosenHero.hp <= 0) {
+   console.log("You Lose")
+   var newBTN = '<button id="replayButton" class="btn btn-primary"> Retry? </button>'
    $("#myBattle").empty()
-   $("#myBattle").html("<h2>GAME OVER!</h2>") 
-   console.log("You Lose")   
+   $("#myBattle").html("<h2> You Lose</h2>" + "<h1>GAME OVER!</h1>" + newBTN)
+   $("#replayButton").on("click", function() {
+   window.location.reload()
+   isHeroAlive = false
+   isEnemyAlive = true
+   })   
 }
 else if (chosenEnemy.hp <=0) {
    $("#myBattle").empty();
-   $("#myBattle").html("<h2>You Win!</h2>")
-   console.log("You Win")
+   $("#myBattle").html("<h2>Victory!</h2>")
+   console.log("Victory")
 }
 
 if ( isHeroAlive && !isEnemyAlive ) {
@@ -133,7 +139,7 @@ else if ( isEnemyAlive && !isHeroAlive) {
 }
 // in progress...... LOL
 // for(var i = 0; i < audioArr.length; i++) {
-//     $("#music").attr("src", audioArr).appendTo(music);
+//     $("#music").attr("src", audioArr).append(music);
 //     audio[0].load();
 // }
 
@@ -167,8 +173,8 @@ image:"assets/images/cloud.png"
 },
 {
 name: "Aerith",
-hp: 100,
-strength: 14,
+hp: 99,
+strength: 13,
 image:"assets/images/aerith.png"
 },
 {
