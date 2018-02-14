@@ -7,18 +7,19 @@
 <title>FF7 RPG</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 <style>
-.fadeOut { opacity : 0.4;}
-body { background-image: url('assets/images/ff7.jpg')}
-* { color: white }
+    .fadeOut { opacity : 0.4;}
+     body { background-image: url('assets/images/ff7.jpg')}
+    * { color: white }
 </style>
-<audio id="music" controls autoplay>
-<source src="assets/images/battle.mp3" type="audio/ogg" type="audio/mpeg">
-</audio>
 </head>
-`
-<body>
-  
 
+<body>
+    <!-- controlbox for the audio -->
+    <audio id="music" controls autoplay>
+        <source src="assets/images/battle.mp3" type="audio/ogg" type="audio/mpeg">
+        </audio>
+
+        <!-- container to hold things  -->
 <div class="container">
 <div id ="characters" class="row">
 </div>
@@ -34,7 +35,8 @@ body { background-image: url('assets/images/ff7.jpg')}
 </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.js"integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="crossorigin="anonymous"></script>
+<!-- end of html stuff and beginning of js -->
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 
 <script>
 
@@ -89,9 +91,9 @@ chosenEnemy.image + "'style='width:410px;height:630px;'/> <p>" +
 chosenEnemy.name + "</p><h6>HP</h6><p id='enemyHP'>"+chosenEnemy.hp +
 "</p></div>")
 $("#myEnemy").html(myEnemyThing)
+
 }
 })
-
 //function 2
 $("#attackBTN").on("click", function() {
 var num1 = Math.floor(Math.random()*20)
@@ -111,6 +113,7 @@ winOrLose()
 
 function winOrLose() {
 if (chosenHero.hp <= 0) {
+    $("#music").attr("src", "assets/images/gg.mp3")
    console.log("You Lose")
    var newBTN = '<button id="replayButton" class="btn btn-primary"> Retry? </button>'
    $("#myBattle").empty()
@@ -124,6 +127,7 @@ if (chosenHero.hp <= 0) {
 else if (chosenEnemy.hp <=0) {
    $("#myBattle").empty();
    $("#myBattle").html("<h2>Victory!</h2>")
+   $("#music").attr("src", "assets/images/victory.mp3")
    console.log("Victory")
 }
 
@@ -135,16 +139,8 @@ else if ( isEnemyAlive && !isHeroAlive) {
 
 }
 }
-
-
 // // name, hp, strength, image
 var charArr = [
-{
-name: "Sephiroth",
-hp: 150,
-strength: 20,
-image:"assets/images/sephiroth.png"
-},
 {
 name: "Cloud",
 hp: 100,
@@ -153,15 +149,9 @@ image:"assets/images/cloud.png"
 },
 {
 name: "Aerith",
-hp: 85,
+hp: 75,
 strength: 12,
 image:"assets/images/aerith.png"
-},
-{
-name: "Tifa",
-hp: 100,
-strength: 20,
-image:"assets/images/tifa.png"
 },
 {
 name: "Vincent",
@@ -170,10 +160,23 @@ strength: 20,
 image:"assets/images/vincent.png"
 },
 {
+name: "Tifa",
+hp: 100,
+strength: 20,
+image:"assets/images/tifa.png"
+},
+{
 name: "Barret",
 hp: 100,
 strength: 20,
 image:"assets/images/Barret.png"
+},
+{
+
+name: "Sephiroth",
+hp: 150,
+strength: 50,
+image:"assets/images/sephiroth.png"
 },
 ]
 
