@@ -1,5 +1,5 @@
 # Rpg-Game
-A basic rpg game based off Final Fantasy 7. I used html and jQuery. 
+A basic rpg game based off Final Fantasy 7 using html && jQuery. 
 
 # Rules
 Pick your hero and then pick your opponent. 
